@@ -1,5 +1,6 @@
 [alias]
   co = checkout
+  cob = checkout -b
   st = status
   empty = commit --allow-empty -m
   glog = log --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph
@@ -8,7 +9,9 @@
   po = push origin
   pm = pull origin master
   lo = log --oneline
-  ac = add . && git commit
+  ga = git add .
+  gc = git commit -m
+  gcam = git commit --amend --no-edit
 [branch]
   autosetupmerge = always
   autosetuprebase = always
