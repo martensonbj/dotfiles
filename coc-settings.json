@@ -1,0 +1,40 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["css", "javascript", "javascriptreact", "json", "markdown", "typescript", "typescriptreact", "go"],
+  "coc.source.gocode.enable": true,
+  "diagnostic.errorSign": "☠️'",
+  "diagnostic.hintSign": "👉",
+  "diagnostic.infoSign": "ℹ️",
+  "diagnostic.warningSign": "⚠️'",
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "javascript.format.insertSpaceAfterCommaDelimiter": false,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+  "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+  "javascript.format.insertSpaceBeforeAndAfterBinaryOperators": false,
+  "javascript.preferences.noSemicolons": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  },
+  "list.insertMappings": {
+    "<C-t>": "action:tabe",
+    "<C-v>": "action:vsplit",
+    "<C-x>": "action:split",
+    "<C-z>": "do:toggle"
+  },
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "suggest.autoTrigger":"trigger",
+  "tsserver.formatOnType": false,
+  "typescript.format.insertSpaceAfterCommaDelimiter": false,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+  "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
+  "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": false,
+  "typescript.preferences.noSemicolons": true
+}

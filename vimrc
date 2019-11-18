@@ -1,4 +1,3 @@
-" Disable vi compatibility
 set nocompatible
 
 " Plugins
@@ -6,40 +5,35 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " Editor
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dyng/ctrlsf.vim'
-Plug 'ervandew/supertab'
 Plug 'henrik/vim-indexed-search'
-Plug 'mhinz/vim-grepper'
 Plug 'mkitt/pigment'
 Plug 'mkitt/tabline.vim'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ton/vim-bufsurf'
-Plug 'vim-scripts/YankRing.vim'
-Plug 'w0rp/ale'
-Plug 'yssl/QFEnter'
-
-" Editing
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'yssl/QFEnter'
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Filetypes
 Plug 'jparise/vim-graphql'
-Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
 Plug 'othree/html5.vim'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
-
-" Utility
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
+Plug 'rhysd/vim-github-actions'
 
 call plug#end()
-
 runtime! macros/matchit.vim
 filetype plugin indent on
 syntax enable
@@ -49,11 +43,14 @@ syntax enable
 set autoindent
 set autoread
 set backspace=2
+if has("balloon_eval") && has("unix") | set ballooneval | endif
 set clipboard=unnamed
 set complete-=i
 set completeopt=longest,menu,menuone,preview,noselect,noinsert
 set display+=lastline
 set expandtab
+set formatoptions+=j
+if executable('rg') | set grepprg=rg\ | endif
 set hidden
 set history=1000
 set hlsearch
@@ -76,6 +73,7 @@ set scrolloff=3
 set sessionoptions-=options
 set shiftround
 set shiftwidth=2
+set signcolumn=yes
 set showmatch
 set sidescrolloff=3
 set smartcase
@@ -83,82 +81,43 @@ set smartindent
 set smarttab
 set softtabstop=2
 set splitright splitbelow
+if &t_Co == 8 && $TERM !~# '^linux' | set t_Co=16 | endif
 set tabstop=2
 set title
 set ttimeout
 set ttimeoutlen=50
 set ttyfast
 set undolevels=1000
+set updatetime=50
 set wildignore+=*.DS_Store
 set wildmenu
 set wildmode=longest:full,full
 
-if has("balloon_eval") && has("unix")
-  set ballooneval
-endif
-
-if &t_Co == 8 && $TERM !~# '^linux'
-  set t_Co=16
-endif
-
-if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j
-endif
-
-if executable('rg')
-  set grepprg=rg\
-  let g:ctrlp_user_command='rg --files %s'
-  let g:ctrlp_use_caching=0
-endif
-
-let g:ctrlp_extensions=['line']
-let g:ctrlp_cache_dir=$HOME.'/.vim/tmp/ctrlp/'
-let g:ctrlp_custom_ignore='vendor/bundle\|.bundle\|tmp\|.git$'
-
 let g:ctrlsf_auto_close=0
-
-let g:netrw_liststyle=3
-let g:NERDTreeWinSize=40
-let g:NERDTreeMinimalUI=1
+let g:indexed_search_colors=0
+let g:javascript_plugin_flow=1
+let g:markdown_fenced_languages=['css', 'html', 'javascript', 'json', 'sh', 'typescript=javascript', 'go']
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeMapUpdir='-'
-
-let g:SuperTabLongestEnhanced=1
-let g:SuperTabLongestHighlight=1
-let g:SuperTabDefaultCompletionType='<C-n>'
-
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeWinSize=40
+let g:netrw_liststyle=3
 let g:qfenter_keymap={}
-let g:qfenter_keymap.vopen=['<C-v>']
 let g:qfenter_keymap.hopen=['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen=['<C-t>']
-
-let g:ale_completion_enabled=1
-let g:ale_fix_on_save=1
-let g:ale_fixers={'javascript': ['eslint', 'prettier']}
-let g:ale_history_log_output=0
-let g:ale_javascript_eslint_executable='eslint_d'
-let g:ale_javascript_eslint_use_global=1
-let g:ale_linters={'html': ['tidy']}
-let g:ale_open_list='on_save'
-let g:ale_set_balloons=1
-let g:ale_sign_error='☠️'
-let g:ale_sign_warning='⚠️'
-
-let g:yankring_window_height=10
+let g:qfenter_keymap.vopen=['<C-v>']
 let g:yankring_history_dir=$HOME.'/.vim/tmp/yankring/'
+let g:yankring_window_height=10
 
-let g:ale_close_preview_on_insert=1
+" let g:go_highlight_types=1
+" let g:go_highlight_fields=1
+" let g:go_highlight_functions=1
+" let g:go_highlight_function_calls=1
+" let g:go_highlight_operators= 1
+" let g:go_highlight_extra_types=1
 
-let g:indexed_search_colors=0
-
-let g:javascript_plugin_flow=1
-
-" Mappings
+" Key Mappings
 " --------------------------------------
-" RSI reduction
-nnoremap j gj
-nnoremap k gk
-
 " Move between splits
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
@@ -173,34 +132,39 @@ nnoremap <silent>_ :silent edit .<CR>
 nnoremap <silent><C-i> :BufSurfBack<CR>
 nnoremap <silent><C-o> :BufSurfForward<CR>
 
-" Another alternative CtrlP mapping
-nnoremap <silent><C-@> :CtrlP<CR>
-
-" The `g` commands
-nmap gad <Plug>(ale_documentation)
-nmap gah <Plug>(ale_hover)
-nmap gaf <Plug>(ale_find_references)
-nmap gan <Plug>(ale_next_wrap)
-nmap gap <Plug>(ale_previous_wrap)
-nmap gf <Plug>(ale_go_to_definition)
-nmap gF <Plug>(ale_go_to_definition_in_vsplit)
-" nnoremap <silent>gF :vertical wincmd f<CR>
-nnoremap <silent>gl :CtrlP<CR>
-nnoremap <silent>gL :CtrlPBuffer<CR>
+" The `g`oto commands
+nnoremap <silent><C-@> :CocList<CR>
+nnoremap <silent>ga :CocList --normal diagnostics<CR>
+nnoremap <silent>gb :CocList buffers<CR>
+nnoremap <silent>gd :call CocAction('jumpTypeDefinition')<CR>
+nnoremap <silent>gf :call CocAction('jumpDefinition')<CR>
+nnoremap <silent>gF :call CocAction('jumpDefinition', 'vsplit')<CR>
+nnoremap <silent>gh :call CocAction('doHover')<CR>
+nnoremap <silent>gl :CocList files<CR>
+nnoremap <silent>gL :CocListResume<CR>
+nnoremap <silent>gr :call CocAction('jumpReferences')<CR>
+nnoremap gs :CocList grep<CR>
+xnoremap gs y :CocList grep <C-R>=escape(@",'$ ')<CR><CR>
+nnoremap <silent>gV `[v`]
+nnoremap <silent>gx :call CocAction('showSignatureHelp')<CR>
 nnoremap <silent>gy :NERDTreeToggle<CR>
-nnoremap gs :GrepperRg<space>
-xnoremap gs y:<c-u>GrepperRg -F <C-R>=shellescape(@",1)<CR>
 nmap gz <Plug>CtrlSFPrompt
 vmap gz <Plug>CtrlSFVwordExec
 
-" Visually select the text that was last edited/pasted
-nnoremap <silent>gV `[v`]
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Tab through popup menu items and allow return to select
+" inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<Tab>" : coc#refresh()
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <silent><expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <C-@> coc#refresh()
 
 " Clear the search highlight
 noremap <silent><leader>] :nohlsearch<CR>
-
-" Hide the quickfix window (ALE)
-noremap <silent><leader>\ :lcl<CR>
 
 " Remove whitespace
 noremap <silent><leader>CW :%s/\s\+$//<CR>
@@ -209,7 +173,6 @@ noremap <silent><leader>CW :%s/\s\+$//<CR>
 xnoremap <silent><leader>y "xy
 noremap <silent><leader>p "xp
 
-noremap <silent><leader>h :ALEHover<CR>
 " Filetypes
 " --------------------------------------
 func! Eatchar(pat)
@@ -220,21 +183,29 @@ endfunc
 if has("autocmd")
   augroup FTOptions
     autocmd!
-    autocmd User Grepper :resize 10
-    autocmd QuickFixCmdPost *grep* botright copen
-    autocmd FileType markdown,text,txt setlocal tw=80 linebreak nolist wrap spell
     autocmd BufRead,BufNewFile *.md set filetype=markdown
-    autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal spell
+    autocmd BufRead,BufNewFile *.ts set syntax=javascript
+    autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx
+    autocmd BufRead,BufNewFile *.tsx set syntax=javascript.jsx
     autocmd BufRead,BufNewFile .env.* set filetype=sh
-    autocmd BufRead,BufNewFile *.ts set filetype=javascript
-    autocmd BufRead,BufNewFile *.tsx set filetype=javascript.jsx
+    autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal spell
+    autocmd FileType markdown,text,txt setlocal tw=80 linebreak nolist wrap spell
+    autocmd FileType qf setlocal wrap
+    autocmd QuickFixCmdPost *grep* botright copen
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
     " Abbreviations
-    autocmd FileType *.{js,jsx,ts,tsx} iabbrev <buffer> bgc backgroundColor: '',<Left><Left><C-R>=Eatchar('\s')<CR>
-    autocmd FileType *.{js,jsx,ts,tsx} iabbrev <buffer> sdb outline: '1px dotted blue',<C-R>=Eatchar('\s')<CR>
-    autocmd FileType *.{js,jsx,ts,tsx} iabbrev <buffer> cdl console.log()<Left><C-R>=Eatchar('\s')<CR>
+    autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx iabbrev <buffer> bgc backgroundColor: '',<Left><Left><C-R>=Eatchar('\s')<CR>
+    autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx iabbrev <buffer> sdb outline: '1px dotted blue',<C-R>=Eatchar('\s')<CR>
+    autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx iabbrev <buffer> cdl console.log()<Left><C-R>=Eatchar('\s')<CR>
   augroup END
 endif
 
 " Theme
 " --------------------------------------
 colorscheme pigment
+
+hi def link CocDiagnosticsError     Error
+hi def link CocDiagnosticsWarning   WarningMsg
+hi def link NERDTreeExecFile        Special
+hi def link htmlH1                  Statement
+hi def link multiple_cursors_cursor IncSearch

@@ -1,8 +1,8 @@
 brews = bash-completion ctags git hub ripgrep tidy-html5 tree watchman wget write-good yarn
-casks = appcleaner backblaze charles google-chrome gpg-suite graphql-playground imageoptim rowanj-gitx slack shiftit sketch qlstephen
-npms = eslint_d serve
+casks = appcleaner backblaze charles google-chrome gpg-suite imageoptim insomnia rowanj-gitx slack shiftit sketch qlstephen
+cocs = coc-css coc-eslint coc-html coc-json coc-lists coc-prettier coc-tsserver
 dots = bash_profile bashrc gitconfig gitconfig.local inputrc vimrc
-tmps = tmp/ctrlp tmp/yankring
+tmps = tmp/yankring
 plug = https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # --------------------------------------
@@ -14,23 +14,23 @@ help:
 	@printf "%s\nGlobal packages:\n"
 	@printf "%sbrew: $(brews)\n"
 	@printf "%scask: $(casks)\n"
-	@printf "%snpm: $(npms)\n"
+	@printf "%scocs: $(cocs)\n"
 
-#/ install         Installs homebrews, casks, global npms and dotfiles
+#/ install         Installs homebrews, casks, and dotfiles
 install:
 	sudo -v
 	brew install $(brews)
 	brew install macvim --with-override-system-vim
 	brew cask install $(casks)
-	npm install $(npms) --global
 	@for file in $(dots); do ln -sfv `pwd`/$$file $$HOME/.$$file; done
 	@if [[ -d $$HOME/.vim ]]; then rm -rf $$HOME/.vim; fi
 	@for tmp in $(tmps); do mkdir -pv $$HOME/.vim/$$tmp; done
+	@ln -sfv `pwd`/coc-settings.json $$HOME/.vim/
 	@curl -fLo ~/.vim/autoload/plug.vim --create-dirs $(plug)
-	@printf "%s\nInstall vim plugins: :PlugInstall"
+	@printf "%s\nInstall vim plugins: :PlugInstall and :CocInstall $(cocs)"
 	@printf "%s\nSetup macOS defaults: make macos\n"
 
-#/ uninstall       Removes homebrews, casks, global npms and dotfiles
+#/ uninstall       Removes homebrews, casks, and dotfiles
 uninstall:
 	sudo -v
 	brew uninstall $(brews) macvim
@@ -39,7 +39,7 @@ uninstall:
 	@rm -rfv $$HOME/.vim
 	@for file in $(dots); do rm -v $$HOME/.$$file; done
 
-#/ update          Updates homebrews, casks and global npm packages
+#/ update          Updates homebrews, casks and packages
 update:
 	brew update
 	brew outdated
@@ -48,8 +48,8 @@ update:
 	brew cask upgrade
 	brew cleanup
 	brew doctor
-	npm install $(npms) --global
-	@printf "%s\nUpdate vim plugins: :PlugUpgrade, :PlugUpdate\n"
+	@printf "%s\nUpdate vim plugins: :PlugUpgrade, :PlugUpdate, :CocUpdate\n"
+	@printf "%s\nRun :CocRebuild if node.js was upgraded\n"
 
 #/ macos           Setup macOS defaults: https://mths.be/macos
 macos:

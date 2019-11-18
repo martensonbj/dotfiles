@@ -1,5 +1,5 @@
 unset MAILCHECK
-export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
+export PATH="$PATH"
 export LC_ALL=C
 export ARCHFLAGS="-arch x86_64"
 export EDITOR="vim"
@@ -73,3 +73,5 @@ alias ls="ls -G"
 alias mv="mv -i"
 alias reload="source ~/.bash_profile && cd ../ && cd -"
 alias app="cd ~/Projects/imagine-analytics/webapp"
+alias glennis="cd ~/Projects/imagine-analytics/glennis"
+alias sb="cd ~/Projects/imagine-analytics/glennis/packages/storybook && yarn start"
