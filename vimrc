@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 " Editor
 Plug 'dyng/ctrlsf.vim'
 Plug 'henrik/vim-indexed-search'
-Plug 'mkitt/pigment'
+Plug 'mkitt/pigment', { 'tag': 'v1.0.0' }
 Plug 'mkitt/tabline.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -134,6 +134,7 @@ nnoremap <silent><C-o> :BufSurfForward<CR>
 
 " The `g`oto commands
 nnoremap <silent><C-@> :CocList<CR>
+nnoremap <silent><C-c> :CocList commands<CR>
 nnoremap <silent>ga :CocList --normal diagnostics<CR>
 nnoremap <silent>gb :CocList buffers<CR>
 nnoremap <silent>gd :call CocAction('jumpTypeDefinition')<CR>
@@ -150,6 +151,8 @@ nnoremap <silent>gx :call CocAction('showSignatureHelp')<CR>
 nnoremap <silent>gy :NERDTreeToggle<CR>
 nmap gz <Plug>CtrlSFPrompt
 vmap gz <Plug>CtrlSFVwordExec
+nmap <silent>g. <Plug>(coc-codeaction)
+vmap <silent>g. <Plug>(coc-codeaction-selected)
 
 function! s:check_back_space() abort
   let col = col('.') - 1
