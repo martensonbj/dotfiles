@@ -38,6 +38,7 @@ else
 fi
 
 # Handy stuff
+alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
 alias cp="cp -i"
@@ -46,7 +47,17 @@ alias ll="ls -l"
 alias ls="ls -G"
 alias mv="mv -i"
 alias reload="source ~/.zprofile && cd ../ && cd -"
-
+alias glo="git log --oneline"
+alias gfd="git clean -f -d"
+alias gf="git clean -f"
+alias balance="cd ~/Projects/balance"
+alias oog="cd ~/Projects/vangst/oogmerk"
+alias pikl="cd ~/Projects/vangst/pikl"
+alias yolo="git push origin main"
+alias main="git checkout main && git pull origin main"
+alias vv="nvim"
+alias pp="pnpm"
+alias dev="pnpm dev:web"
 # case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
                                     'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' \
