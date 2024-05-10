@@ -11,7 +11,7 @@
 [color]
   ui = auto
 [commit]
-  gpgsign = true
+	gpgsign = true
 [core]
   pager = /opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
   trustctime = false
@@ -34,3 +34,4 @@
 [user]
 	email = martensonbj@gmail.com
 	name = Brenna Martenson
+	signingkey = C83A9EF2894F56A3
