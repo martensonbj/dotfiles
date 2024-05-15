@@ -38,26 +38,41 @@ else
 fi
 
 # Handy stuff
-alias ..="cd ../"
-alias ...="cd ../../"
-alias ....="cd ../../../"
+
+# Basic
 alias cp="cp -i"
+alias dev="pnpm dev:web"
 alias la="ls -lA"
 alias ll="ls -l"
 alias ls="ls -G"
 alias mv="mv -i"
 alias reload="source ~/.zprofile && cd ../ && cd -"
-alias glo="git log --oneline"
-alias gfd="git clean -f -d"
-alias gf="git clean -f"
+
+# Moving Around
+alias ..="cd ../"
+alias ...="cd ../../"
+alias ....="cd ../../../"
 alias balance="cd ~/Repositories/balance"
+alias dotfiles="cd ~/dotfiles"
 alias oog="cd ~/Repositories/vangst/oogmerk"
 alias pikl="cd ~/Repositories/vangst/pikl"
-alias yolo="git push origin main"
+
+# Gits
+alias gf="git clean -f"
+alias gfd="git clean -f -d"
+alias glo="git log --oneline"
 alias main="git checkout main && git pull origin main"
-alias vv="nvim"
+alias yolo="git push origin main"
+
+# Processes
+alias killem="kill -9"
+alias pxport="lsof -i :3000"
+alias pxgit="ps aux | grep git"
+
+# Devving
 alias pp="pnpm"
-alias dev="pnpm dev:web"
+alias vv="nvim"
+
 # case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
                                     'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' \
