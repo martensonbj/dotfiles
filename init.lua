@@ -375,6 +375,10 @@ vim.keymap.set("n", "]g", "<Plug>(coc-diagnostic-next)", norsil)
 -- Leader commands
 vim.keymap.set("n", "<leader><leader>", ":nohlsearch<CR>", norsil)
 
+-- Custom commands
+vim.keymap.set("i", "jk", "<Esc>", norsil)
+vim.keymap.set("i", "kj", "<Esc>", norsil)
+
 -- Auto Commands
 -- -------------------------------------
 vim.cmd [[
@@ -385,7 +389,7 @@ vim.cmd [[
 ]]
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "javascript", "typescript", "typescriptreact" },
-    command = "iabbrev <buffer> cdl console.log()<Left><C-R>=Eatchar('\\s')<CR>",
+    command = "iabbrev <buffer> cdl console.log('bmart ', )<Left><Left><Left><Left><C-R>=Eatchar('\\s')<CR>",
 })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "md", "markdown", "text", "txt" },
