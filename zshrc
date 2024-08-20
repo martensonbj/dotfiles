@@ -55,7 +55,7 @@ alias ....="cd ../../../"
 alias balance="cd ~/Repositories/balance"
 alias dotfiles="cd ~/dotfiles"
 alias oog="cd ~/Repositories/vangst/oogmerk"
-alias pikl="cd ~/Repositories/vangst/pikl"
+alias pikl="cd ~/Repositories/pikl-repos/pikl"
 
 # Gits
 alias gf="git clean -f"
