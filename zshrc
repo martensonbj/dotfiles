@@ -5,7 +5,6 @@ export EDITOR="nvim"
 
 # Add color to man pages
 export LESS_TERMCAP_md="$(tput setaf 4)"
-
 # http://zsh.sourceforge.net/Doc/Release/Options.html
 setopt APPEND_HISTORY
 setopt AUTO_CD
@@ -32,9 +31,10 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
   . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
   setopt PROMPT_SUBST
   GIT_PS1_SHOWDIRTYSTATE="true"
-  PROMPT='%F{5}[%m]%f %F{4}%1~%f %F{6}$(__git_ps1 "[%s] ")%f%F{8}%#%f '
+  # PROMPT='%F{5}[%m]%f %F{4}%1~%f %F{6}$(__git_ps1 "[%s] ")%f%F{8}%#%f '
+  PROMPT='%F{51}[%n]%f %F{197}%1~%f %F{208}$(__git_ps1 "[%s] ⚡ ")%f%F{8}%#%f '
 else
-  PROMPT='%F{5}[%m]%f %F{4}%1~%f %F{8}%#%f '
+  PROMPT='%F{51}[%n]%f %F{197}%1~%f %F{6}%#%f ⚡ '
 fi
 
 # Handy stuff

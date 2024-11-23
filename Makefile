@@ -1,5 +1,5 @@
 brews = fd git gh node pnpm ripgrep tree
-casks = gpg-suite rectangle slack google-chrome spotify 1password
+casks = gpg-suite spotify rectangle slack google-chrome 1password
 cocs = coc-css coc-eslint coc-html coc-json coc-lists coc-prettier coc-sh coc-sumneko-lua coc-tsserver coc-vimlsp coc-yaml
 npms = @tailwindcss/language-server graphql-language-service-cli
 dots = gitconfig gitconfig.local vimrc zprofile zshrc

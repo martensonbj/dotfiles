@@ -34,4 +34,6 @@
 [user]
 	email = martensonbj@gmail.com
 	name = Brenna Martenson
-	signingkey = C83A9EF2894F56A3
+	signingkey = E6ABF2D7051270CA
+[tag]
+	gpgSign = true
