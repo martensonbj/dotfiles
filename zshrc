@@ -41,7 +41,6 @@ fi
 
 # Basic
 alias cp="cp -i"
-alias dev="pnpm dev:web"
 alias la="ls -lA"
 alias ll="ls -l"
 alias ls="ls -G"
@@ -52,10 +51,8 @@ alias reload="source ~/.zprofile && cd ../ && cd -"
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
-alias balance="cd ~/Repositories/balance"
 alias dotfiles="cd ~/dotfiles"
-alias oog="cd ~/Repositories/vangst/oogmerk"
-alias pikl="cd ~/Repositories/pikl-repos/pikl"
+alias fe="cd ~/Projects/postscript/postscript-frontend"
 
 # Gits
 alias gf="git clean -f"
@@ -70,8 +67,13 @@ alias pxport="lsof -i :3000"
 alias pxgit="ps aux | grep git"
 
 # Devving
+alias awsso="aws sso login"
+alias dev="pnpm dev:web"
+alias go="npm run start"
+alias nupgradez="npx npm-check-updates"
 alias pp="pnpm"
 alias vv="nvim"
+alias yupgradez="yarn upgrade-interactive --latest"
 
 # case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
@@ -86,3 +88,7 @@ zstyle ':completion:*' expand prefix suffix
 # Load zsh completion engine
 autoload -Uz compinit && compinit
 true
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
