@@ -53,8 +53,10 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 alias dotfiles="cd ~/dotfiles"
 alias fe="cd ~/Projects/postscript/postscript-frontend"
+alias api="cd ~/Projects/postscript/postscript-api"
 
 # Gits
+alias gac="git add . && git commit -m"
 alias gf="git clean -f"
 alias gfd="git clean -f -d"
 alias glo="git log --oneline"
