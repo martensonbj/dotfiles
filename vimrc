@@ -47,3 +47,6 @@ if has("autocmd")
 endif
 
 colorscheme delek
+
+highlight Tooltip guifg='white' guibg='black'
+

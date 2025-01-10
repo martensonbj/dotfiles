@@ -357,8 +357,10 @@ vim.keymap.set("n", "<C-S>", builtin.resume, norsil)
 vim.keymap.set("n", "<C-Y>", ":Neotree toggle<CR>", norsil)
 vim.keymap.set("n", "-", ":Neotree current %:p:h<CR>", norsil)
 vim.keymap.set("n", "_", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", norsil)
+
 -- HALP
-vim.keymap.set("n", "ga", ":Neotree reveal_file=%source<CR>", norsil)
+-- Toggle neotree and reveal current file
+vim.keymap.set("n", "ga", ":Neotree toggle reveal<CR>", norsil)
 
 -- The `g` commands
 vim.keymap.set("n", "g.", cocs.file_code_actions, norsil)
@@ -392,15 +394,6 @@ vim.cmd [[
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "javascript", "typescript", "typescriptreact" },
     command = "iabbrev <buffer> cdl console.log('bmart ', )<Left><Left><Left><Left><C-R>=Eatchar('\\s')<CR>",
-})
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "javascript", "typescript", "typescriptreact" },
-    command =
-    "iabbrev <buffer> psd console.log('bmart parsed',  JSON.stringify(parsed))<Left><Left><C-R>=Eatchar('\\s')<CR>",
-})
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "javascript", "typescript", "typescriptreact" },
-    command = "iabbrev <buffer> res console.log('bmart res',  JSON.stringify(res))<Left><Left><C-R>=Eatchar('\\s')<CR>",
 })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "md", "markdown", "text", "txt" },

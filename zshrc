@@ -62,6 +62,7 @@ alias gfd="git clean -f -d"
 alias glo="git log --oneline"
 alias main="git checkout main && git pull origin main"
 alias yolo="git push origin main"
+alias push="git push origin $(git rev-parse --abbrev-ref HEAD)"
 
 # Processes
 alias killem="kill -9"
@@ -72,8 +73,10 @@ alias pxgit="ps aux | grep git"
 alias awsso="aws sso login"
 alias dev="pnpm dev:web"
 alias go="npm run start"
-alias local="npm run start:local"
+alias goLocal="npm run start:local"
+alias chex="npm run typecheck && npm run lint && npm run prettier-check"
 alias nupgradez="npx npm-check-updates"
+alias spec_="npx jest src/components/flowBuilder/components/__tests__/"
 alias pp="pnpm"
 alias up="docker compose up"
 alias vv="nvim"
@@ -92,7 +95,7 @@ zstyle ':completion:*' expand prefix suffix
 # Load zsh completion engine
 autoload -Uz compinit && compinit
 true
-
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && [ -f "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && [ -f "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
