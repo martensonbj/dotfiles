@@ -60,9 +60,10 @@ alias gac="git add . && git commit -m"
 alias gf="git clean -f"
 alias gfd="git clean -f -d"
 alias glo="git log --oneline"
+alias pull="git pull origin $(git rev-parse --abbrev-ref HEAD)"
+alias push="git push origin $(git rev-parse --abbrev-ref HEAD)"
 alias main="git checkout main && git pull origin main"
 alias yolo="git push origin main"
-alias push="git push origin $(git rev-parse --abbrev-ref HEAD)"
 
 # Processes
 alias killem="kill -9"
