@@ -69,6 +69,7 @@ function set_git_aliases() {
      alias main="git checkout main && git pull origin main"
      alias pull="git pull origin $(git rev-parse --abbrev-ref HEAD)"
      alias push="git push origin $(git rev-parse --abbrev-ref HEAD)"
+     alias force="git push origin $(git rev-parse --abbrev-ref HEAD) -f"
      alias yolo="git push origin main"
 else 
     # unalias files 2>/dev/null
@@ -103,6 +104,8 @@ alias spec_="npx jest src/components/flowBuilder"
 alias up="docker compose up"
 alias vv="nvim"
 alias yupgradez="yarn upgrade-interactive --latest"
+alias neovim-something="/Users/brenna.martenson/.config/dotfiles/nvim"
+alias nvim-test='NVIM_APPNAME="nvim-test" nvim'
 
 # For Postscript
 echo "{ \"credsStore\": \"ecr-login\" }" > ~/.docker/config.json
