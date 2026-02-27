@@ -46,6 +46,16 @@ alias ls="ls -G"
 alias mv="mv -i"
 alias reload="source ~/.zshrc && cd ../ && cd -"
 
+# Brenna's Additions
+alias bbake="caffeinate -i -d -t 28800" # 8 hours
+alias dotfiles="cd ~/dotfiles"
+alias fpush="git push --force-with-lease origin"
+alias glo="git log --oneline"
+alias main="git checkout main && git pull origin main"
+alias surfs="cd ~/Sites/homebotapp/surfaces"
+alias thaw="killall caffeinate"
+alias vv="nvim"
+
 # case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
                                     'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
@@ -58,13 +68,9 @@ zstyle ':completion:*' expand prefix suffix
 autoload -Uz compinit && compinit
 
 # pnpm
-export PNPM_HOME="${ZDOTDIR:-$HOME}/Library/pnpm"
+export PNPM_HOME="/Users/brenna.martenson@homebot.ai/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-
-# Load local zshrc file if it exists
-if [ -f "${ZDOTDIR:-$HOME}/.zshrc.local" ]; then
-  source "${ZDOTDIR:-$HOME}/.zshrc.local"
-fi
+# pnpm end
