@@ -77,7 +77,3 @@ alias glo="git log --oneline"
 alias main="git checkout main && git pull origin main"
 alias recommit="git commit --amend --no-edit"
 alias thaw='pkill caffeinate && echo '\''Thawed'\'' || echo '\''Nothing to thaw'\'
-
-
-# -------- Open new ghostty tab in same directory -------------
-export GPG_TTY=$(tty)

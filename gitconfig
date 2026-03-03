@@ -23,6 +23,7 @@
   pruneTags = true
 [gpg]
 	program = gpg
+	format = ssh
 [help]
   autocorrect = prompt
 [include]
@@ -44,5 +45,5 @@
 [tag]
   sort = version:refname
 [user]
-	signingkey = 3B19158515B12150
+	signingkey = /Users/brenna.martenson@homebot.ai/.ssh/id_ed25519.pub
 	email = brenna.martenson@homebot.ai
