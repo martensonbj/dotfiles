@@ -8,7 +8,7 @@
   autosetuprebase = always
   sort = -committerdate
 [commit]
-  gpgsign = true
+	gpgsign = true
 [core]
   excludesfile = ~/.gitignore
   pager = /opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
@@ -22,7 +22,7 @@
   prune = true
   pruneTags = true
 [gpg]
-  program = /usr/local/MacGPG2/bin/gpg2
+	program = gpg
 [help]
   autocorrect = prompt
 [include]
@@ -43,3 +43,6 @@
   enabled = true
 [tag]
   sort = version:refname
+[user]
+	signingkey = 3B19158515B12150
+	email = brenna.martenson@homebot.ai
