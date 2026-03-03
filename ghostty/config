@@ -5,6 +5,11 @@ auto-update = check
 # theme = beamish
 theme = nordish
 
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = #E93D82
+macos-icon-screen-color = #05010A,#140015,#260021
+
 adjust-cell-height = 30%
 cursor-style-blink = false
 font-size = 13
@@ -18,3 +23,4 @@ window-inherit-working-directory = false
 
 # Fix for Claude return key
 keybind = shift+enter=text:\n
+
