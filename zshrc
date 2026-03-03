@@ -80,19 +80,4 @@ alias thaw='pkill caffeinate && echo '\''Thawed'\'' || echo '\''Nothing to thaw'
 
 
 # -------- Open new ghostty tab in same directory -------------
-LAST_DIR_FILE="$HOME/.last_dir"
-
-# On shell exit, record the current directory
-chpwd() {
-  print -r -- "$PWD" >| "$LAST_DIR_FILE"
-}
-
-# Also capture the directory when the shell exits normally
-TRAPEXIT() {
-  print -r -- "$PWD" >| "$LAST_DIR_FILE"
-}
-
-# On shell startup, go to the last directory if available
-if [[ -r "$LAST_DIR_FILE" ]]; then
-  cd -- "$(cat "$LAST_DIR_FILE")" 2>/dev/null || true
-fi
+export GPG_TTY=$(tty)
