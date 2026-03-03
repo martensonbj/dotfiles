@@ -38,7 +38,7 @@ fi
 # Handy stuff
 alias ...="cd ../../"
 alias ....="cd ../../../"
-alias bake="caffeinate -i -d -t 3600"
+# alias bake="caffeinate -i -d -t 3600" # See Brenna's Additions at the end
 alias cp="cp -i"
 alias la="ls -lA"
 alias ll="ls -l"
@@ -46,15 +46,6 @@ alias ls="ls -G"
 alias mv="mv -i"
 alias reload="source ~/.zshrc && cd ../ && cd -"
 
-# Brenna's Additions
-alias bbake="caffeinate -i -d -t 28800" # 8 hours
-alias dotfiles="cd ~/dotfiles"
-alias fpush="git push --force-with-lease origin"
-alias glo="git log --oneline"
-alias main="git checkout main && git pull origin main"
-alias surfs="cd ~/Sites/homebotapp/surfaces"
-alias thaw="killall caffeinate"
-alias vv="nvim"
 
 # case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
@@ -74,3 +65,34 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# ------------ Brenna's Additions -----------------------------
+alias bake='caffeinate -i -d -t 3600 & disown; echo '\''Baking for 1 hour'\'
+alias bbake='caffeinate -i -d -t 28800 & disown; echo '\''Baking for 8 hours'\'
+alias dotfiles="cd ~/dotfiles"
+alias fe="cd ~/Sites/homebotapp/surfaces"
+alias fpush="git push --force-with-lease origin"
+alias giles="cd ~/Sites/martensonbj/giles"
+alias glo="git log --oneline"
+alias main="git checkout main && git pull origin main"
+alias recommit="git commit --amend --no-edit"
+alias thaw='pkill caffeinate && echo '\''Thawed'\'' || echo '\''Nothing to thaw'\'
+
+
+# -------- Open new ghostty tab in same directory -------------
+LAST_DIR_FILE="$HOME/.last_dir"
+
+# On shell exit, record the current directory
+chpwd() {
+  print -r -- "$PWD" >| "$LAST_DIR_FILE"
+}
+
+# Also capture the directory when the shell exits normally
+TRAPEXIT() {
+  print -r -- "$PWD" >| "$LAST_DIR_FILE"
+}
+
+# On shell startup, go to the last directory if available
+if [[ -r "$LAST_DIR_FILE" ]]; then
+  cd -- "$(cat "$LAST_DIR_FILE")" 2>/dev/null || true
+fi
