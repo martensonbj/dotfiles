@@ -1,0 +1,13 @@
+################################################################
+# TLS configuration
+################################################################
+
+tls:
+  certificates:
+    - certFile: /ssl/cert-chain.pem
+      keyFile: /ssl/cert-chain.pem
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /ssl/cert-chain.pem
+        keyFile: /ssl/cert-chain.pem

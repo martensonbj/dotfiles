@@ -69,11 +69,21 @@ esac
 # ------------ Brenna's Additions -----------------------------
 alias bake='caffeinate -i -d -t 3600 & disown; echo '\''Baking for 1 hour'\'
 alias bbake='caffeinate -i -d -t 28800 & disown; echo '\''Baking for 8 hours'\'
+alias bots="cd ~/Sites/homebotapp/surfaces-bots"
 alias dotfiles="cd ~/dotfiles"
 alias fe="cd ~/Sites/homebotapp/surfaces"
 alias fpush="git push --force-with-lease origin"
 alias giles="cd ~/Sites/martensonbj/giles"
 alias glo="git log --oneline"
 alias main="git checkout main && git pull origin main"
+alias nv="nvim"
+alias ppb="pnpm build"
+alias ppc="pnpm check"
+alias ppd="pnpm dev"
 alias recommit="git commit --amend --no-edit"
+alias restart="docker rm -f ai-mastra-postgres && pnpm build && pnpm mastra:dev"
 alias thaw='pkill caffeinate && echo '\''Thawed'\'' || echo '\''Nothing to thaw'\'
+alias qa="cd ~/Sites/homebotapp/surfaces-reviews"
+
+# To track secrets like GH PAT
+[ -f ~/.secrets ] && source ~/.secrets
