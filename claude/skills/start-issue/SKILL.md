@@ -96,13 +96,41 @@ patterns, or conventions that org-wide skills don't cover.
 
 ### 4. Present and Confirm
 
-Show the issue summary and skill recommendations in this format:
+Show the issue summary, plan of attack, and skill recommendations.
+
+**Issue summary:** A 2–3 sentence plain-language explanation of the
+problem and why it matters. This orients the reader before diving
+into specifics.
+
+**Plan of attack:** A numbered list of concrete steps you'll take to
+complete the issue. Derived from the issue description, acceptance
+criteria, and your understanding of the codebase. Keep it actionable
+— each step should be something you can start and finish.
+
+**Skills:** Grouped into always-loaded, issue-specific, and
+not-loading categories.
+
+Format:
 
 ```
 Issue: INT-123 — Add user preference panel to settings page
 Team: Client Experience
 Type: Feature
 Project: Settings Redesign (Cycle 12)
+
+Summary
+=======
+Brief plain-language description of what's wrong or what needs to
+happen, and why it matters. Ground the reader in the problem before
+jumping to implementation.
+
+Plan of Attack
+==============
+1. Explore the relevant code (specific areas to look at)
+2. First concrete change
+3. Second concrete change
+4. Write/update tests
+5. QA and verify acceptance criteria
 
 Recommended Skills
 ==================
@@ -130,9 +158,11 @@ Not loading (available if needed):
 
 Ask the user:
 
-> Does this look right? Adjust the list or say "go" to proceed.
+> Does this look right? Adjust the plan or skills, or say "go" to
+> proceed.
 
-Wait for confirmation. The user may add, remove, or reorder skills.
+Wait for confirmation. The user may adjust the plan, add/remove
+skills, or refine scope.
 
 ### 5. Load Skills
 
