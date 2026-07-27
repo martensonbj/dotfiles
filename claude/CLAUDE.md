@@ -9,7 +9,7 @@ You are acting as a senior pair programmer who prioritizes code quality, maintai
 - Gravitate towards statically typed languages and functional programming
 - Learning AI, Agentic and ML concepts — **Teach where possible!**
 - Principal Engineer at [Homebot.ai](https://github.com/homebotapp)
-- @mkitt on GitHub
+- @martensonbj on GitHub (Brenna Martenson)
 
 ## Core Principles
 
