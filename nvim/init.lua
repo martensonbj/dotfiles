@@ -21,6 +21,7 @@ vim.opt.showcmd = false
 vim.opt.signcolumn = 'number'
 vim.opt.title = true
 -- Window Management
+vim.opt.diffopt:append('vertical')
 vim.opt.sidescrolloff = 3
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -57,9 +58,10 @@ vim.pack.add({
   'https://github.com/MunifTanjim/nui.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
   -- Editing
-  'https://github.com/echasnovski/mini.surround',
   'https://github.com/gbprod/yanky.nvim',
   'https://github.com/nvim-treesitter/nvim-treesitter',
+  'https://github.com/tpope/vim-repeat',
+  'https://github.com/tpope/vim-surround',
   -- Editor
   'https://github.com/fang2hou/blink-copilot',
   'https://github.com/github/copilot.vim',

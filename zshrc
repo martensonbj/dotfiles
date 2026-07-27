@@ -62,9 +62,14 @@ autoload -Uz compinit && compinit
 export PNPM_HOME="/Users/brenna.martenson@homebot.ai/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *) export PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
+
+# mise (version manager) — activates per-directory tool versions
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
 
 # Machine-local overrides and secrets — not tracked in the dotfiles repo.
 if [ -f "${ZDOTDIR:-$HOME}/.zshrc.local" ]; then
@@ -356,6 +361,3 @@ sync-ca() {
 
 # Pritunl CLI (added by hb:vpn-setup)
 alias pritunl="/Applications/Pritunl.app/Contents/Resources/pritunl-client"
-
-# mise — node/runtime version manager; auto-switches per repo (.nvmrc, .node-version, .tool-versions)
-eval "$(mise activate zsh)"
