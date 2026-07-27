@@ -2,8 +2,7 @@
 # https://ghostty.org/docs/config/reference
 auto-update = check
 
-# theme = beamish
-theme = nordish
+theme = light:beamish,dark:nordish
 
 macos-icon = custom-style
 macos-icon-frame = plastic
@@ -25,4 +24,3 @@ window-inherit-working-directory = true
 
 # Fix for Claude return key
 keybind = shift+enter=text:\n
-
