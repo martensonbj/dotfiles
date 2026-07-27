@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Punch — {{DATE_HUMAN}}</title>
+    <style>
+      :root {
+        /* surfaces palette (packages/ui/styles.css) */
+        --background: #1e1c23;
+        --background-deep: #121215;
+        --card: #25232b;
+        --input: #302d36;
+        --border: #5b5a60;
+        --text: #e8e7e8;
+        --muted: #aeacb3;
+        --faint: #8b8a8f;
+        --accent: #d63384;
+        --green: #4ade80;
+        --amber: #fbbf24;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font:
+          15px/1.55 -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        padding: 2rem 1rem 4rem;
+      }
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem;
+      }
+      .stamp {
+        color: var(--faint);
+        font-size: 0.8rem;
+        margin: 0 0 1.5rem;
+      }
+      .progress-wrap {
+        background: var(--background-deep);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.9rem 1rem;
+        margin-bottom: 1.75rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .progress-track {
+        flex: 1;
+        height: 8px;
+        border-radius: 4px;
+        background: var(--input);
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: var(--accent);
+        border-radius: 4px;
+        transition: width 0.25s ease;
+      }
+      #progress-label {
+        font-variant-numeric: tabular-nums;
+        color: var(--muted);
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.1rem 1.25rem;
+        margin-bottom: 1.25rem;
+      }
+      section h2 {
+        font-size: 1.02rem;
+        margin: 0 0 0.35rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .badge {
+        font-size: 0.66rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 0.14rem 0.5rem;
+        border-radius: 999px;
+        text-transform: uppercase;
+      }
+      .badge.queue {
+        background: var(--accent);
+        color: #fff;
+      }
+      .badge.mine {
+        background: var(--input);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .badge.watch {
+        background: var(--input);
+        color: var(--amber);
+        border: 1px solid var(--border);
+      }
+      .badge.triage {
+        background: var(--input);
+        color: var(--accent);
+        border: 1px solid var(--border);
+      }
+      .badge.carried {
+        background: var(--input);
+        color: var(--amber);
+        border: 1px dashed var(--amber);
+      }
+      .badge.done {
+        background: var(--input);
+        color: var(--green);
+        border: 1px solid var(--border);
+      }
+      .section-note {
+        color: var(--muted);
+        font-size: 0.86rem;
+        margin: 0 0 0.75rem;
+      }
+      .section-count {
+        margin-left: auto;
+        color: var(--faint);
+        font-size: 0.78rem;
+        font-weight: 400;
+      }
+      ul.items {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      ul.items li {
+        display: flex;
+        gap: 0.65rem;
+        align-items: flex-start;
+        padding: 0.45rem 0;
+        border-top: 1px solid var(--background);
+      }
+      ul.items li:first-child {
+        border-top: 0;
+      }
+      ul.items input[type="checkbox"] {
+        margin-top: 0.25rem;
+        width: 15px;
+        height: 15px;
+        flex: none;
+        accent-color: var(--accent);
+        cursor: pointer;
+      }
+      ul.items label {
+        cursor: pointer;
+      }
+      li.checked label {
+        color: var(--faint);
+        text-decoration: line-through;
+        text-decoration-color: var(--border);
+      }
+      li.checked label code {
+        color: inherit;
+      }
+      li .note {
+        display: block;
+        color: var(--muted);
+        font-size: 0.84rem;
+        margin-top: 0.1rem;
+      }
+      li.checked .note {
+        color: var(--faint);
+      }
+      ul.plain {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+      ul.plain li {
+        padding: 0.2rem 0;
+      }
+      code {
+        background: var(--input);
+        border-radius: 4px;
+        padding: 0.08rem 0.35rem;
+        font:
+          0.84em ui-monospace,
+          "SF Mono",
+          Menlo,
+          monospace;
+        color: var(--text);
+      }
+      a {
+        color: var(--accent);
+      }
+      a.ref {
+        text-decoration: none;
+        border-bottom: 1px dotted var(--accent);
+      }
+      a.ref:hover {
+        border-bottom-style: solid;
+      }
+      pre.standup {
+        background: var(--background-deep);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.9rem 1rem;
+        white-space: pre-wrap;
+        font:
+          0.88em ui-monospace,
+          "SF Mono",
+          Menlo,
+          monospace;
+        color: var(--text);
+        margin: 0 0 0.75rem;
+      }
+      details.yesterday summary {
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      details.yesterday[open] summary {
+        margin-bottom: 0.6rem;
+      }
+      textarea {
+        width: 100%;
+        background: var(--background-deep);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font: inherit;
+        font-size: 0.9rem;
+        padding: 0.7rem 0.8rem;
+        resize: vertical;
+        margin-bottom: 0.6rem;
+      }
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+      .toolbar {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+      button {
+        background: var(--input);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.84rem;
+        cursor: pointer;
+      }
+      button:hover {
+        border-color: var(--accent);
+      }
+      .copy-status {
+        color: var(--green);
+        font-size: 0.84rem;
+        align-self: center;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 1rem 0.6rem 3rem;
+        }
+        section {
+          padding: 0.9rem 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Punch — {{DATE_HUMAN}}</h1>
+      <p class="stamp">
+        Generated {{GENERATED_AT}} · checkbox state lives in this browser
+        (localStorage) · end of day: "Copy as Markdown" then
+        <code>/punch sync</code> to save state — unfinished items carry over
+        tomorrow
+      </p>
+
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span id="progress-label"></span>
+      </div>
+
+      <section id="standup">
+        <h2>Standup <span class="badge mine">paste-ready</span></h2>
+        <pre class="standup" id="standup-text">{{STANDUP_BLOCK}}</pre>
+        <button id="copy-standup" type="button">Copy standup</button>
+        <span class="copy-status" id="standup-status">copied ✓</span>
+      </section>
+
+      <section data-section="punch">
+        <h2>
+          1 — Punch list <span class="badge mine">priority order</span
+          ><span class="section-count"></span>
+        </h2>
+        <ul class="items">
+          {{PUNCH_ITEMS}}
+        </ul>
+      </section>
+
+      <section data-section="quick">
+        <h2>2 — Quick wins<span class="section-count"></span></h2>
+        <p class="section-note">
+          Small, unblocking, or overdue — good for gaps between meetings.
+        </p>
+        <ul class="items">
+          {{QUICK_ITEMS}}
+        </ul>
+      </section>
+
+      <section data-section="ticket">
+        <h2>
+          3 — Needs a ticket? <span class="badge triage">triage</span
+          ><span class="section-count"></span>
+        </h2>
+        <p class="section-note">
+          Conversations and branches with no Linear issue behind them. Check =
+          ticket created or consciously skipped.
+        </p>
+        <ul class="items">
+          {{TICKET_ITEMS}}
+        </ul>
+      </section>
+
+      <section data-section="watch">
+        <h2>
+          4 — Waiting on others <span class="badge watch">watch</span
+          ><span class="section-count"></span>
+        </h2>
+        <ul class="items">
+          {{WATCH_ITEMS}}
+        </ul>
+      </section>
+
+      <section id="yesterday">
+        <details class="yesterday">
+          <summary>5 — Yesterday ({{YESTERDAY_LABEL}}) — debrief</summary>
+          {{YESTERDAY_CONTENT}}
+        </details>
+      </section>
+
+      <section id="notes">
+        <h2>6 — Notes for tomorrow</h2>
+        <p class="section-note">
+          Jot during the day, then "Copy as commands" and paste into any Claude
+          session — or run <code>/punch note &lt;text&gt;</code> directly.
+          Tomorrow's run drains the queue into its punch list.
+        </p>
+        {{NOTES_CONSUMED}}
+        <textarea
+          id="tomorrow-notes"
+          rows="4"
+          placeholder="- follow up on …"
+        ></textarea>
+        <button id="copy-notes" type="button">Copy as commands</button>
+        <span class="copy-status" id="notes-status">copied ✓</span>
+      </section>
+
+      <div class="toolbar">
+        <button id="copy-md" type="button">Copy as Markdown</button>
+        <button id="reset" type="button">Reset to file state</button>
+        <span class="copy-status" id="copy-status">copied ✓</span>
+      </div>
+    </main>
+
+    <script>
+      const STORAGE_KEY = "punch-{{DATE_ISO}}";
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
+      const items = [...document.querySelectorAll("li[data-id]")];
+
+      function persist() {
+        const state = { notes: document.getElementById("tomorrow-notes").value };
+        for (const li of items) {
+          const box = li.querySelector("input");
+          // Only store deviations from the file state, so file updates win elsewhere.
+          if (String(Number(box.checked)) !== li.dataset.done)
+            state[li.dataset.id] = box.checked;
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function render() {
+        let done = 0;
+        for (const li of items) {
+          const box = li.querySelector("input");
+          li.classList.toggle("checked", box.checked);
+          if (box.checked) done += 1;
+        }
+        const pct =
+          items.length === 0 ? 0 : Math.round((done / items.length) * 100);
+        document.getElementById("progress-fill").style.width = pct + "%";
+        document.getElementById("progress-label").textContent =
+          `${done}/${items.length} · ${pct}%`;
+        for (const section of document.querySelectorAll("section[data-section]")) {
+          const sectionItems = [...section.querySelectorAll("li[data-id]")];
+          const counter = section.querySelector(".section-count");
+          if (counter && sectionItems.length > 0) {
+            const sectionDone = sectionItems.filter(
+              (li) => li.querySelector("input").checked,
+            ).length;
+            counter.textContent = `${sectionDone}/${sectionItems.length}`;
+          }
+        }
+      }
+
+      for (const li of items) {
+        const box = li.querySelector("input");
+        box.checked =
+          li.dataset.id in saved
+            ? saved[li.dataset.id]
+            : li.dataset.done === "1";
+        box.addEventListener("change", () => {
+          persist();
+          render();
+        });
+      }
+      const notesBox = document.getElementById("tomorrow-notes");
+      notesBox.value = saved.notes ?? "";
+      notesBox.addEventListener("input", persist);
+      render();
+
+      function flash(id) {
+        const status = document.getElementById(id);
+        status.style.opacity = 1;
+        setTimeout(() => {
+          status.style.opacity = 0;
+        }, 1500);
+      }
+
+      document.getElementById("reset").addEventListener("click", () => {
+        localStorage.removeItem(STORAGE_KEY);
+        for (const li of items)
+          li.querySelector("input").checked = li.dataset.done === "1";
+        notesBox.value = "";
+        render();
+      });
+
+      document
+        .getElementById("copy-standup")
+        .addEventListener("click", async () => {
+          await navigator.clipboard.writeText(
+            document.getElementById("standup-text").textContent.trim(),
+          );
+          flash("standup-status");
+        });
+
+      document
+        .getElementById("copy-notes")
+        .addEventListener("click", async () => {
+          const lines = notesBox.value
+            .split("\n")
+            .map((l) => l.replace(/^[-*]\s*/, "").trim())
+            .filter(Boolean)
+            .map((l) => `/punch note ${l}`);
+          await navigator.clipboard.writeText(lines.join("\n"));
+          flash("notes-status");
+        });
+
+      document.getElementById("copy-md").addEventListener("click", async () => {
+        const lines = ["# Punch — {{DATE_ISO}}", ""];
+        for (const section of document.querySelectorAll(
+          "section[data-section]",
+        )) {
+          lines.push(
+            "## " +
+              section
+                .querySelector("h2")
+                .textContent.replace(/\s+/g, " ")
+                .trim(),
+            "",
+          );
+          for (const li of section.querySelectorAll("li")) {
+            const box = li.querySelector("input");
+            const text = li.textContent.replace(/\s+/g, " ").trim();
+            // The id comment lets `/punch sync` map lines back to items.
+            const idTag = li.dataset.id ? ` <!-- id:${li.dataset.id} -->` : "";
+            lines.push(
+              box
+                ? `- [${box.checked ? "x" : " "}] ${text}${idTag}`
+                : `- ${text}`,
+            );
+          }
+          lines.push("");
+        }
+        await navigator.clipboard.writeText(lines.join("\n"));
+        flash("copy-status");
+      });
+    </script>
+  </body>
+</html>
